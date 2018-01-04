@@ -5,7 +5,8 @@ import android.util.Log;
 import java.util.Locale;
 
 /**
- * 日志打印的工具类,该类提供5种级别的日志,对日志的打印方式进行
+ * 日志打印的工具类,该类提供5种级别的日志,对日志的打印方式进行封装.
+ * <p>
  * Created by LeeYewKuan on 2018/1/2.
  */
 
@@ -57,6 +58,11 @@ public final class Logs {
         showClassName = isShowClassName;
     }
 
+    /**
+     * v 级别日志信息.
+     *
+     * @param logMsg 用户想要打印的信息
+     */
     public static void v(String logMsg) {
         if (debug) {
             stacks = (new Throwable()).getStackTrace()[1];
@@ -64,6 +70,11 @@ public final class Logs {
         }
     }
 
+    /**
+     * d 级别日志信息.
+     *
+     * @param logMsg 用户想要打印的信息
+     */
     public static void d(String logMsg) {
         if (debug) {
             stacks = (new Throwable()).getStackTrace()[1];
@@ -72,6 +83,11 @@ public final class Logs {
 
     }
 
+    /**
+     * i 级别日志信息.
+     *
+     * @param logMsg 用户想要打印的信息
+     */
     public static void i(String logMsg) {
         if (debug) {
             stacks = (new Throwable()).getStackTrace()[1];
@@ -80,6 +96,11 @@ public final class Logs {
 
     }
 
+    /**
+     * w 级别日志信息.
+     *
+     * @param logMsg 用户想要打印的信息
+     */
     public static void w(String logMsg) {
         if (debug) {
             stacks = (new Throwable()).getStackTrace()[1];
@@ -87,6 +108,11 @@ public final class Logs {
         }
     }
 
+    /**
+     * e 级别日志信息.
+     *
+     * @param logMsg 用户想要打印的信息
+     */
     public static void e(String logMsg) {
         if (debug) {
             stacks = (new Throwable()).getStackTrace()[1];
@@ -114,7 +140,7 @@ public final class Logs {
      * 获取拼接后的日志内容.
      *
      * @param logMsg 输入的信息
-     * @return 子集: M[%s],T[%s-%d],L[%d],Msg[%s]
+     * @return 子集: M[%s],T[%s,%d],S[%d],L[%d],Msg[%s]
      */
     private static String getLogMessage(String logMsg) {
         String threadName;
@@ -130,13 +156,13 @@ public final class Logs {
             Thread thread = Thread.currentThread();
             id = thread.getId();
             threadName = thread.getName();
-            builder.append(String.format(Locale.CHINA, ">T[%s,%d]", threadName, id));
+            builder.append(String.format(Locale.CHINA, ",T[%s,%d]", threadName, id));
         }
-        if (baseTime > 0){
-            builder.append(String.format(Locale.CHINA,">S[%d]",System.currentTimeMillis() - baseTime));
+        if (baseTime > 0) {
+            builder.append(String.format(Locale.CHINA, ",S[%d]", System.currentTimeMillis() - baseTime));
         }
         int lineNumber = stacks.getLineNumber();
-        builder.append(String.format(Locale.CHINA, ">L[%d]>Msg[%s]", lineNumber, logMsg));
+        builder.append(String.format(Locale.CHINA, ",L[%d],Msg[%s]", lineNumber, logMsg));
         return builder.toString();
     }
 
@@ -150,11 +176,17 @@ public final class Logs {
         showClassName = false;
     }
 
-    public static void startTransaction(){
+    /**
+     * 开启事务
+     */
+    public static void startTransaction() {
         baseTime = System.currentTimeMillis();
     }
 
-    public static void endTransaction(){
+    /**
+     * 关闭事务
+     */
+    public static void endTransaction() {
         baseTime = 0;
     }
 }

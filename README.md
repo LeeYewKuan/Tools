@@ -36,13 +36,19 @@
    - 开启结束事务(调试执行性能)
    ```java
    Logs.startTransaction();//开启
-   // 日志在执行的耗时...
+   // 其他的日志的打印...
    Logs.endTransaction();//结束
    ```
    - 还原默认设置
    ```java
    Logs.restoreDefault();
    ```
+   - 日志输出格式说明,格式实例: M[%s],T[%s,%d],S[%d],L[%d],Msg[%s]
+        - `M[%s]` 日志所属方法 `%s` 方法名
+        - `T[%s,%d]` 日志所属线程 `%s` 线程名称, `%d`线程id
+        - `S[%d]` 此日期距离开启事务花费时间 单位毫秒(ms) `%d` 耗费时间
+        - `L[%d]` 日志在源代码中的行数 `%d` 行号
+        - `Msg[%s]` 用户想要输出的信息 `%s` 用户想要打印的信息
 ## 联系方式
 Email:leeyewkuan@gmail.com
    
