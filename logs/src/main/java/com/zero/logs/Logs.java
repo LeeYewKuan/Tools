@@ -44,18 +44,25 @@ public final class Logs {
     }
 
     /**
-     * 初始化日志工具类.
+     * 配置日志工具类输出格式.
      *
-     * @param isDebug         是否开启调试模式,true 开启,false 不开启,默认 true.
      * @param isShowThread    是否显示调用线程, true 展示,false 不展示,默认 false.
      * @param isShowMethod    是否显示调用方法, true 显示,false 不显示,默认 true.
      * @param isShowClassName 是否显示方法被调用处的类名,true 显示类名 com.zero.**, false 显示文件名 ** false
      */
-    public static void initLogs(boolean isDebug, boolean isShowThread, boolean isShowMethod, boolean isShowClassName) {
-        debug = isDebug;
+    public static void configLogs(boolean isShowThread, boolean isShowMethod, boolean isShowClassName) {
         showThread = isShowThread;
         showMethod = isShowMethod;
         showClassName = isShowClassName;
+    }
+
+    /**
+     * 是否开启调试模式.
+     *
+     * @param isDebug 是否开启调试模式,true 开启,false 不开启,默认 true.
+     */
+    public static void setDebug(boolean isDebug) {
+        debug = isDebug;
     }
 
     /**

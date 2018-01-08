@@ -11,20 +11,29 @@
 - 日志管理模块使用方法(logs):
   - 在引用模块的build.gradle中加入依赖
   ```
-  implementation 'com.zero:logs:0.0.1'
+  implementation 'com.zero:logs:0.0.2'
   ```
-  - 配置初始化模块
+  - 配置日志模块展示
   ```java
      /**
-     * 初始化日志工具类.
+     * 配置日志工具类输出格式.
      *
-     * @param isDebug         是否开启调试模式,true 开启,false 不开启,默认 true.
      * @param isShowThread    是否显示调用线程, true 展示,false 不展示,默认 false.
      * @param isShowMethod    是否显示调用方法, true 显示,false 不显示,默认 true.
      * @param isShowClassName 是否显示方法被调用处的类名,true 显示类名 com.zero.**, false 显示文件名 ** false
      */
-   Logs.initLogs(true, true, true, true);
+   Logs.configLogs(true, true, true);
   ```
+  - 设置debug模式
+  ```
+  /**
+   * 是否开启调试模式.
+   *
+   * @param isDebug 是否开启调试模式,true 开启,false 不开启,默认 true.
+   */
+  Logs.setDebug(false)
+  ```
+  
   - 在需要的地方添加日志打印
   ```java
    Logs.v("日");
