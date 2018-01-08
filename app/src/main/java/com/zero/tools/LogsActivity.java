@@ -20,7 +20,7 @@ public class LogsActivity extends AppCompatActivity {
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Logs.initLogs(true, true, true, true);
+                Logs.configLogs(true, true, true);
                 Logs.v("日");
                 Logs.d("志");
                 Logs.i("打");
@@ -35,7 +35,7 @@ public class LogsActivity extends AppCompatActivity {
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Logs.initLogs(true, true, true, true);
+                        Logs.configLogs(true, true, true);
 
                         long start = System.currentTimeMillis();
                         Logs.e("start" + start);
@@ -57,7 +57,7 @@ public class LogsActivity extends AppCompatActivity {
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Logs.initLogs(true, true, true, true);
+                        Logs.configLogs(true, true, true);
                         Logs.startTransaction();
                         for (int i = 0; i < 9000; i++) {
                             Logs.i("" + i);
